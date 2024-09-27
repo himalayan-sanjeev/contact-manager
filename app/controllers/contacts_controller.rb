@@ -3,7 +3,7 @@ class ContactsController < ApplicationController
 
   # GET /contacts
   def index
-    @contacts=Contact.order(created_at: :DESC)
+    @contacts = params[:query].present? ? Contact.search(params[:query]) : Contact.all.order(created_at: :desc)
   end
 
   # GET /contacts/:id
