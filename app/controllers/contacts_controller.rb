@@ -3,7 +3,20 @@ class ContactsController < ApplicationController
 
   # GET /contacts
   def index
-    @contacts = params[:query].present? ? Contact.search(params[:query]) : Contact.all.order(created_at: :desc)
+    @page = params.fetch(:page, 1).to_i  # Get current page number, default to 1
+    @per_page = 10  # Set the number of contacts per page
+    offset = (@page - 1) * @per_page  # Calculate the offset for the query
+  
+    # If there's a search query, paginate the search results, otherwise paginate all contacts
+    @contacts = if params[:query].present?
+                  Contact.search(params[:query]).limit(@per_page).offset(offset).order(created_at: :desc)
+                else
+                  Contact.all.limit(@per_page).offset(offset).order(created_at: :desc)
+                end
+  
+    # Calculate total number of pages for pagination
+    total_contacts = params[:query].present? ? Contact.search(params[:query]).count : Contact.count
+    @total_pages = (total_contacts / @per_page.to_f).ceil
   end
 
   # GET /contacts/:id
