@@ -1,5 +1,12 @@
-<h1><%= action_name.capitalize %> Contact</h1>
+<div class="container-lg mt-5">
+  <div class="card shadow-lg">
+    <div class="card-header bg-primary text-white">
+      <h1 class="h3 mb-0"><%= action_name.capitalize %> Contact</h1>
+    </div>
+    <div class="card-body">
+      <%= render 'form' %>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', contacts_path, class: 'btn btn-secondary' %>
+      <%= link_to 'Back', contacts_path, class: 'btn btn-secondary mt-3' %>
+    </div>
+  </div>
+</div>
