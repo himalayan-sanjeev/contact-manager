@@ -13,6 +13,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="container mt-4">
+      <% flash.each do |key, message| %>
+        <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
+          <%= message %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>
