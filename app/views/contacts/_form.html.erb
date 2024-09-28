@@ -24,5 +24,10 @@
     <%= form.email_field :email, class: 'form-control', required: true %>
   </div>
 
+  <div class="form-group mb-3">
+    <%= form.label :image, class: 'form-label' %>
+    <%= form.file_field :image, class: "form-control" %>
+  </div>
+
   <%= form.submit class: 'btn btn-primary' %>
 <% end %>

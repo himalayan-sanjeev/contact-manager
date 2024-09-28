@@ -79,7 +79,7 @@ class ContactsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def contact_params
-    params.require(:contact).permit(:name, :phone, :email)
+    params.require(:contact).permit(:name, :phone, :email, :image)
   end
 
   # Determines the column to sort the contacts by (defaults to 'name' if no valid column is provided)

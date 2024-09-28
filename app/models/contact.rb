@@ -1,6 +1,8 @@
 class Contact < ApplicationRecord
   # Regular expression for email validation
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+
+  has_one_attached :image
   
   # Validating attributes for data integrity
   validates :name, presence: true
