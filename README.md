@@ -4,11 +4,11 @@ This is a simple Contact Manager application built with Ruby on Rails. It allows
 
 ### Features
 * **Manage Contacts (CRUD)**: Create, Read, Update and Delete contacts with name, phone number and email address.
-* **Search Contacts**: Search for contacts by name, phone number, or email.
+* **Search Contacts**: Search for contacts by name, phone number or email.
 * **Pagination**: Display 10 contacts per page.
-* **Validations**: Includes validation for name, phone, and email fields.
+* **Validations**: Includes validation for name, phone and email fields.
 * **Flash Messages**: Displays success and error messages for actions.
-
+* **Sorting**: Sort contacts by name, phone number or email in ascending or descending order using clickable column headers.
 
 ### Project Prerequisites
 To run this project locally, ensure you have the following installed:
