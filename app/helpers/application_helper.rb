@@ -19,4 +19,18 @@ module ApplicationHelper
       end)
     end
   end
+
+  # Sorting the contacts by column values(ascending and descending sort by alphabetical order for name and email and numerical order for phone)
+  def sortable(column, title = nil)
+    title ||= column.titleize  # Use the column name if no title is provided
+    direction = (column == sort_column && sort_direction == "asc") ? "desc" : "asc"  # Toggle the sort direction
+    link_to "#{title} #{sort_arrows(column)}".html_safe, { sort: column, direction: direction }
+  end
+
+  # Displays an arrow indicating the current sort direction (▲ for ascending, ▼ for descending).
+  def sort_arrows(column)
+    asc_arrow = sort_column == column && sort_direction == "asc" ? "▲" : "△"
+    desc_arrow = sort_column == column && sort_direction == "desc" ? "▼" : "▽"
+    "#{asc_arrow} #{desc_arrow}"
+  end
 end
