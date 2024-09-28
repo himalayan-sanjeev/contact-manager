@@ -46,7 +46,9 @@
     </tbody>
   </table>
   <!-- Pagination Links from the Helper -->
-  <nav aria-label="Page navigation example">
-    <%= bootstrap_paginate(@page, @total_pages) %>
-  </nav>
+  <% if @total_pages > 1 %>
+    <nav aria-label="Page navigation example">
+      <%= bootstrap_paginate(@page, @total_pages) %>
+    </nav>
+  <% end%>
 </div>
