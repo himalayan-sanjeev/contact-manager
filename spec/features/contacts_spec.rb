@@ -65,4 +65,49 @@ RSpec.describe 'Contact Management', type: :system do
     expect(page).to have_content('Contact was successfully deleted.')
     expect(page).not_to have_content(contact1.name)
   end
+
+  # Searching for a contact by name, phone number, or email
+  scenario 'User searches for a contact by name' do
+    visit contacts_path
+
+    fill_in 'Search Contacts...', with: 'John'
+    sleep(2)
+    click_button 'Search'
+    expect(page).to have_content('John Doe')
+    expect(page).not_to have_content('Jane Smith')
+    expect(page).not_to have_content('Alice Wonderland')
+  end
+
+  scenario 'User searches for a contact by phone number' do
+    visit contacts_path
+
+    fill_in 'Search Contacts...', with: '9876543210'
+    sleep(2)
+    click_button 'Search'
+    expect(page).to have_content('Jane Smith')
+    expect(page).not_to have_content('John Doe')
+    expect(page).not_to have_content('Alice Wonderland')
+  end
+
+  scenario 'User searches for a contact by email' do
+    visit contacts_path
+
+    fill_in 'Search Contacts...', with: 'jane.smith@example.com'
+    sleep(2)
+    click_button 'Search'
+    expect(page).to have_content('Jane Smith')
+    expect(page).not_to have_content('John Doe')
+  end
+
+  scenario 'User searches with no matching result' do
+    visit contacts_path
+
+    fill_in 'Search Contacts...', with: 'Nonexistent'
+    sleep(2)
+    click_button 'Search'
+    expect(page).to have_content('No contacts found.')
+    expect(page).not_to have_content('John Doe')
+    expect(page).not_to have_content('Jane Smith')
+    expect(page).not_to have_content('Alice Wonderland')
+  end
 end
