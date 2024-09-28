@@ -18,6 +18,9 @@ To run this project locally, ensure you have the following installed:
 * ```Database: PostgreSQL```
 
 ### Setup Instructions
+There are two ways to set up and run the application: manually or using Docker.
+
+#### Manual Setup
 1. Clone the repository and navigate to project directory:
 
     > git clone https://github.com/himalayan-sanjeev/contact-manager
@@ -38,10 +41,38 @@ To run this project locally, ensure you have the following installed:
 
     Access the application: Visit http://localhost:3000 in your browser to access the app.
 
-### Running Tests
-This project uses RSpec for unit tests and FactoryBot for generating test data. To execute the test suite, run the following command:
+    #### Running Tests
+    This project uses RSpec for unit tests and FactoryBot for generating test data. To execute the test suite, run the following command:
 
-  > bundle exec rspec
+      > bundle exec rspec
+
+#### Docker Setup
+1. Build the Docker images:
+
+    > docker-compose build
+
+2. Run the containers:
+    Start the application using Docker Compose:
+
+    > docker-compose up
+
+    This will start the Rails app and PostgreSQL database. The Rails app will be available at http://localhost:3001
+
+3. Setup the database: Create the database and run the migrations:
+    > docker-compose exec web bin/rails db:create
+    
+    > docker-compose exec web bin/rails db:migrate
+
+4. Running Tests:
+    > docker-compose exec web bundle exec rspec
+
+    This runs the test suite inside the Docker container.
+    
+5. Accessing the Rails Console:
+   > docker-compose exec web bin/rails console
+
+6. Stopping the containers:
+   > docker-compose down
 
 ### Future Improvements
 As this is the basic requirement for now, the project includes basic implementations of the requested features. However, it can be enhanced further with more customization and efficiency by utilizing various approaches and gems:
