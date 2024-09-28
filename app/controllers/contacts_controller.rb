@@ -35,7 +35,7 @@ class ContactsController < ApplicationController
       flash[:notice] = 'Contact was successfully created.'
       redirect_to contacts_path
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -47,9 +47,9 @@ class ContactsController < ApplicationController
   def update
     if @contact.update(contact_params)
       flash[:notice] = 'Contact was successfully updated.'
-      redirect_to contacts_paths
+      redirect_to contacts_path
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
