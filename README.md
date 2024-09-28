@@ -1,24 +1,51 @@
 # README
+## Contact Manager
+This is a simple Contact Manager application built with Ruby on Rails. It allows users to add, edit, delete, and search contacts. Contacts are displayed in a paginated table with basic form validations and error handling.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Features
+* **Manage Contacts (CRUD)**: Create, Read, Update and Delete contacts with name, phone number and email address.
+* **Search Contacts**: Search for contacts by name, phone number, or email.
+* **Pagination**: Display 10 contacts per page.
+* **Validations**: Includes validation for name, phone, and email fields.
+* **Flash Messages**: Displays success and error messages for actions.
 
-Things you may want to cover:
 
-* Ruby version
+### Project Prerequisites
+To run this project locally, ensure you have the following installed:
 
-* System dependencies
+* ```Ruby Version: 3.0.2```
+* ```Rails Version: 7.0.8```
+* ```Database: PostgreSQL```
 
-* Configuration
+### Setup Instructions
+1. Clone the repository and navigate to project directory:
 
-* Database creation
+    > git clone https://github.com/himalayan-sanjeev/contact-manager
 
-* Database initialization
+    > cd contact_manager
 
-* How to run the test suite
+2. Install dependencies: Run the following command to install the necessary gems:
 
-* Services (job queues, cache servers, search engines, etc.)
+    > bundle install
 
-* Deployment instructions
+3. Setup the database: Create the database and run the migrations:
+    > rails db:create
+    
+    > rails db:migrate
 
-* ...
+4. Start the Rails server: Run the following command to start the server:
+    > rails server
+
+    Access the application: Visit http://localhost:3000 in your browser to access the app.
+
+### Running Tests
+This project uses RSpec for unit tests and FactoryBot for generating test data. To execute the test suite, run the following command:
+
+  > bundle exec rspec
+
+### Future Improvements
+As this is the basic requirement for now, the project includes basic implementations of the requested features. However, it can be enhanced further with more customization and efficiency by utilizing various approaches and gems:
+* Add API Support to enable integration with frontend frameworks or mobile apps.
+* Implement Authentication and Authorization using gems like Devise and Pundit for secure access control.
+* Use gem like Kaminari for efficient and customizable pagination.
+* Integrate gem like Filterrific for advanced filtering and sorting functionality, enhancing the user experience with flexible and efficient query options.
