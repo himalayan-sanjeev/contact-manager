@@ -75,3 +75,14 @@ group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
+
+group :test do
+  # Capybara is used for feature and system testing, simulating how a real user would interact with the application.
+  gem 'capybara'
+
+  # Selenium WebDriver provides the browser automation functionality that Capybara uses to drive the tests in real browsers.
+  gem 'selenium-webdriver'
+
+  # Webdrivers automatically downloads and manages the correct version of browser drivers (e.g., ChromeDriver, GeckoDriver) required for Selenium to run the tests.
+  gem 'webdrivers'
+end
