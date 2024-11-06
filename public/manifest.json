@@ -1,0 +1,16 @@
+{
+  "name": "Contact Manager",
+  "short_name": "Contacts",
+  "description": "A simple contact manager PWA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#317EFB",
+  "icons": [
+    {
+      "src": "/images/contact_icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
