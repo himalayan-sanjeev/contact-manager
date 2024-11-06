@@ -10,6 +10,10 @@
     <%= stylesheet_link_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css", media: "all", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <!-- PWA manifest and theme settings -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#317EFB">
   </head>
 
   <body>
@@ -22,5 +26,21 @@
 
       <%= yield %>
     </div>
+
+    <!-- Register the service worker -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function() {
+          navigator.serviceWorker.register("/serviceworker.js").then(
+            function(registration) {
+              console.log("ServiceWorker registration successful with scope: ", registration.scope);
+            },
+            function(err) {
+              console.log("ServiceWorker registration failed: ", err);
+            }
+          );
+        });
+      }
+    </script>
   </body>
 </html>
