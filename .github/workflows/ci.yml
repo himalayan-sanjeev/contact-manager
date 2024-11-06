@@ -1,0 +1,61 @@
+# .github/workflows/ci.yml
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:13
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: contact_manager_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres" 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Install PostgreSQL client
+        run: sudo apt-get install -y libpq-dev
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+
+      - name: Prepare database configuration
+        run: |
+          cp config/database.yml config/database.yml.ci
+          sed -i 's/username:.*/username: postgres/' config/database.yml.ci
+          sed -i 's/password:.*/password: postgres/' config/database.yml.ci
+          sed -i 's/host:.*/host: localhost/' config/database.yml.ci
+
+      - name: Create and set up the test database
+        env:
+          RAILS_ENV: test
+        run: |
+          bin/rails db:create db:schema:load
+
+      - name: Run tests
+        run: |
+          bundle exec rspec
