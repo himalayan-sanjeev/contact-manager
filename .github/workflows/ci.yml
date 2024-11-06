@@ -25,6 +25,11 @@ jobs:
           --health-interval 10s 
           --health-timeout 5s 
           --health-retries 5
+
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -43,16 +48,10 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
 
-      - name: Prepare database configuration
-        run: |
-          cp config/database.yml config/database.yml.ci
-          sed -i 's/username:.*/username: postgres/' config/database.yml.ci
-          sed -i 's/password:.*/password: postgres/' config/database.yml.ci
-          sed -i 's/host:.*/host: localhost/' config/database.yml.ci
-
       - name: Create and set up the test database
         env:
           RAILS_ENV: test
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           bin/rails db:create db:schema:load
 
